@@ -45,12 +45,97 @@ const CustomTableCell = withStyles(theme => ({
   },
 }))(TableCell);
 
-export default class OrdersList extends PureComponent {
-  componentDidMount() {
-    const {onGetOrdersList}  = this.props;
-    onGetOrdersList();
-  }
+const styles = theme => ({
+  root: {
+    width: '100%',
+    marginTop: 0,
+    overflowX: 'auto',
+    boxShadow: 'none',
+    fontSize: 14,
+    color: colors.fontTable,
+  },
+  container:{
+    width:'100%',
+  },
+  table: {
+    minWidth: '100%',
+  },
+  row: {
+    // color: colors.fontTable,
+    textAlign: 'left',
+    '&:nth-of-type(odd)': {
+      backgroundColor: colors.tableGrey,
+    },
+  },
+  nameRow:{
+    width: '30%',
+    fontWeight: '100',
+  },
+  flex:{
+    flex: '1',
+    textAlign: 'center',
+    fontSize:18,
+    fontWeight: 'normal',
+  },
+  bar:{
+    backgroundColor: colors.white,
+  },
+  button: {
+    margin: '0 .5em',
+    background: 'transparent',
+    boxShadow: 'none',
+    height: '20px',
+    width: '20px',
+    '&:hover':{
+      background: 'transparent',
+    },
+    '&:active': {
+      boxShadow: 'none',
+      background: 'transparent',
+    },
+    '&:focus': {
+      boxShadow: 'none',
+      background: 'transparent',
+    },
+  },
+  actionCover:{
+    display: 'flex',
+    flexFlow: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    document:{
+      boxShadow: 'none',
+      borderRadius: '4px',
+    },
+  },
+  actionCell:{
+    width: '15%',
+    textAlign: 'center',
+  },
+  formControl:{
+    width: '100%',
+    borderRadius: '4px',
 
+  },
+  icon:{
+    display: 'none',
+  },
+  rootAction:{
+    width: '100%',
+    marginTop: 0,
+    overflowX: 'auto',
+    boxShadow: 'none',
+    borderRadius: '4px',
+  },
+  selectMenu:{
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingRight: 0,
+  },
+});
+
+class OrdersList extends PureComponent {
   renderItems = () => {
     const {
       items,
@@ -94,3 +179,5 @@ export default class OrdersList extends PureComponent {
     )
   }
 }
+
+export default withStyles(styles)(OrdersList);

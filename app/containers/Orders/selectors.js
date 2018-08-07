@@ -6,3 +6,8 @@ export const makeOrders = () => createSelector(
   selectOrdersDomain,
   (substate) => substate.getIn(['list', 'items']),
 );
+
+export const selectOrdersListQuery = () => createSelector(
+  selectOrdersDomain,
+  (substate) => substate.getIn(['list', 'query']),
+);

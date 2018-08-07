@@ -6,7 +6,10 @@ import immutableProps from "hocs/immutableProps";
 import injectReducer from "utils/injectReducer";
 import { getOrdersListAction } from "./actions";
 import reducer from "./reducer";
-import {makeOrders} from "./selectors";
+import {
+  makeOrders,
+  selectOrdersListQuery,
+} from "./selectors";
 import ListComponent from './components/List';
 
 class OrdersList extends PureComponent {
@@ -16,12 +19,11 @@ class OrdersList extends PureComponent {
 
   requestList = (newQuery = {}) => {
     const {
-      query,
+      orderQuery,
       onGetOrdersList,
     } = this.props;
-
     onGetOrdersList({
-      ...query,
+      ...orderQuery,
       ...newQuery,
     });
   };
@@ -38,6 +40,7 @@ class OrdersList extends PureComponent {
 
 const mapStateToProps = createStructuredSelector({
   orders: makeOrders(),
+  orderQuery: selectOrdersListQuery(),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -45,7 +48,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
-const withReducer = injectReducer({key: 'order', reducer});
+const withReducer = injectReducer({key: 'orders', reducer});
 
 export default compose(
   withReducer,

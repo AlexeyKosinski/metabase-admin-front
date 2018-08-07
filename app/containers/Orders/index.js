@@ -4,17 +4,14 @@
 
 import React from 'react';
 import {Helmet} from 'react-helmet';
-import {Switch, Redirect} from 'react-router-dom';
+import {Switch, Route, Redirect} from 'react-router-dom';
 import {createStructuredSelector} from 'reselect';
-import PrivateRoute from 'components/PrivateRoute';
 import trans from 'trans';
 import ListContainer from './List';
 import {
   ROUTE_TO_ORDERS,
   ROUTE_TO_ORDERS_LIST,
 } from 'constants/routes';
-
-const redirectTo = link => (<Redirect to={link} />);
 
 export default class OrdersContainer extends React.PureComponent {
   render() {
@@ -25,12 +22,12 @@ export default class OrdersContainer extends React.PureComponent {
           <meta name="description" />
         </Helmet>
         <Switch>
-          <PrivateRoute
+          <Route
             exact
             path={ROUTE_TO_ORDERS}
-            render={redirectTo(ROUTE_TO_ORDERS_LIST)}
+            render={() => (<Redirect to={ROUTE_TO_ORDERS_LIST} />)}
           />
-          <PrivateRoute path={ROUTE_TO_ORDERS_LIST} component={ListContainer} />
+          <Route path={ROUTE_TO_ORDERS_LIST} component={ListContainer} />
         </Switch>
       </div>
     )

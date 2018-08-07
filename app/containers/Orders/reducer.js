@@ -24,13 +24,19 @@ const initialState = fromJS({
 
 export default typeToReducer({
   [GET_ORDERS_LIST]: {
-    START: (state = fromJS([]), paylaod) => {
-      debugger;
+    START: (state = fromJS([]), action) => {
+      return state.setIn(['list', 'query'], fromJS(action.meta));
     },
-    SUCCESS: (state = fromJS([]), d) => reducerParse(d, (data) => {
-        return state.set('users', fromJS(data));
+    SUCCESS: (state = fromJS([]), d) => reducerParse(d,
+      data => {
+        const totalPages = Math.ceil(data.count / state.getIn(['list', 'query', 'count']));
+
+        return state
+          .setIn(['list', 'items'], fromJS(data.orders))
+          .setIn(['list', 'totalItems'], fromJS(data.count))
+          .setIn(['list', 'totalPages'], fromJS(totalPages));
       },
-      (payload) => {
+      payload => {
         const {data, status} = payload;
         return state.set('errors', fromJS(data));
       },
