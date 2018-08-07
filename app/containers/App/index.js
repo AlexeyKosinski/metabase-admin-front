@@ -11,6 +11,8 @@ import { Helmet } from 'react-helmet'
 import styled from 'styled-components'
 import { Route, Switch } from 'react-router-dom'
 
+import PrivateRoute from 'components/PrivateRoute';
+
 import Login from 'containers/Login/Loadable'
 import Users from 'containers/Users/Loadable'
 import Orders from 'containers/Orders/Loadable';
@@ -28,7 +30,6 @@ import {
   ROUTE_TO_ORDERS,
   ROUTE_TO_USERS,
   ROUTE_TO_LOGIN,
-  ROUTE_TO_LOGIN_ALTERNATIVE,
 } from 'constants/routes';
 
 const AppWrapper = styled.div`
@@ -72,10 +73,9 @@ export default function App (props) {
               <SideBar history={props.history} />
             )}
           <Switch>
-            <Route path={ROUTE_TO_LOGIN} component={Login} />
-            <Route exact path={ROUTE_TO_LOGIN_ALTERNATIVE} component={Login} />
-            <Route path={ROUTE_TO_ORDERS} component={Orders} />
-            <Route path={ROUTE_TO_USERS} component={Users} />
+            <Route exact path={ROUTE_TO_LOGIN} component={Login} />
+            <PrivateRoute path={ROUTE_TO_ORDERS} component={Orders} />
+            <PrivateRoute path={ROUTE_TO_USERS} component={Users} />
             <Route path="" component={NotFoundPage} />
           </Switch>
           <Footer/>

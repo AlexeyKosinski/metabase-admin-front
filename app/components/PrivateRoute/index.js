@@ -8,12 +8,6 @@ import getToken from 'utils/getToken';
 import { ROUTE_TO_LOGIN } from 'constants/routes';
 
 class PrivateRoute extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-  }
-
   render() {
     const {
       component,
