@@ -13,6 +13,7 @@ import { Route, Switch } from 'react-router-dom'
 
 import Login from 'containers/Login/Loadable'
 import Users from 'containers/Users/Loadable'
+import Orders from 'containers/Orders/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable'
 import FlexedContainer from 'components/FlexedContainer'
 import SideBar from "components/SideBar";
@@ -23,6 +24,12 @@ import Footer from 'components/Footer'
 import trans from '../../trans'
 import { createMuiTheme } from '@material-ui/core/styles';
 import '../../app.global.css';
+import {
+  ROUTE_TO_ORDERS,
+  ROUTE_TO_USERS,
+  ROUTE_TO_LOGIN,
+  ROUTE_TO_LOGIN_ALTERNATIVE,
+} from 'constants/routes';
 
 const AppWrapper = styled.div`
   margin: 0 auto;
@@ -65,10 +72,11 @@ export default function App (props) {
               <SideBar history={props.history} />
             )}
           <Switch>
-            <Route exact path="/" component={Login}/>
-            <Route path="/login" component={Login}/>
-            <Route path="/users" component={Users}/>
-            <Route path="" component={NotFoundPage}/>
+            <Route path={ROUTE_TO_LOGIN} component={Login} />
+            <Route exact path={ROUTE_TO_LOGIN_ALTERNATIVE} component={Login} />
+            <Route path={ROUTE_TO_ORDERS} component={Orders} />
+            <Route path={ROUTE_TO_USERS} component={Users} />
+            <Route path="" component={NotFoundPage} />
           </Switch>
           <Footer/>
         </FlexedContainer>
