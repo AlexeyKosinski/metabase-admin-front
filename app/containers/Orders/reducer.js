@@ -36,8 +36,16 @@ const initialState = fromJS({
 export default typeToReducer({
   [GET_ORDERS_LIST]: {
     START: (state = fromJS([]), action) => {
+      const { filters, ...query } = action.meta;
+
+      if (filters) {
+        _.forEach(filters, (values, key) => {
+          state = state.setIn(['list', 'filters', key, 'selectedValues'], fromJS(values));
+        });
+      }
+
       return state
-        .setIn(['list', 'query'], fromJS(action.meta))
+        .setIn(['list', 'query'], fromJS(query))
         .setIn(['list', 'loading'], fromJS(true));
     },
     SUCCESS: (state = fromJS([]), d) => reducerParse(d,

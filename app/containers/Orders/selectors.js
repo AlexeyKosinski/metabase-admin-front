@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import _ from 'lodash'
 
 const selectOrdersDomain = (state) => state.get('orders');
 
@@ -20,4 +21,17 @@ export const selectOrdersListTotalItems = () => createSelector(
 export const selectOrdersListLoading = () => createSelector(
   selectOrdersDomain,
   (substate) => substate.getIn(['list', 'loading']),
+);
+
+export const selectOrderListFilters = () => createSelector(
+  selectOrdersDomain,
+  (substate) => {
+    const filters = substate.getIn(['list', 'filters']).toJS();
+
+    return _.forEach(filters, (item, key) => {
+      return {
+        [key]: item.selectedValues,
+      };
+    });
+  }
 );

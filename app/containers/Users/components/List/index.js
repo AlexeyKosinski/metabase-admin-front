@@ -140,7 +140,7 @@ const styles = theme => ({
   },
 });
 
-class OrdersList extends PureComponent {
+class UsersList extends PureComponent {
   handlePageChange = (page) => {
     this.props.requestMethod({
       page,
@@ -164,7 +164,7 @@ class OrdersList extends PureComponent {
   render() {
     const {
       classes,
-      orderQuery,
+      listQuery,
       totalItems,
       listLoading,
     } = this.props;
@@ -174,7 +174,7 @@ class OrdersList extends PureComponent {
         <AppBar position="static" color="default" className={classes.bar}>
           <Toolbar>
             <Typography variant="title" className={classes.flex}>
-              {trans('admin.panel.orders')}
+              {trans('admin.panel.users')}
             </Typography>
           </Toolbar>
         </AppBar>
@@ -186,18 +186,18 @@ class OrdersList extends PureComponent {
                 <Table className={classes.table}>
                   <TableHead>
                     <TableRow>
-                      <CustomTableCell>{trans('admin.panel.orders.ID')}</CustomTableCell>
-                      <CustomTableCell>{trans('admin.panel.orders.user')}</CustomTableCell>
-                      <CustomTableCell>{trans('admin.panel.orders.status')}</CustomTableCell>
-                      <CustomTableCell>{trans('admin.panel.orders.craetedAt')}</CustomTableCell>
+                      <CustomTableCell>{trans('admin.panel.users.ID')}</CustomTableCell>
+                      <CustomTableCell>{trans('admin.panel.users.user')}</CustomTableCell>
+                      <CustomTableCell>{trans('options')}</CustomTableCell>
+                      <CustomTableCell>{trans('admin.panel.users.craetedAt')}</CustomTableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>{this.renderItems()}</TableBody>
                 </Table>
                 <Pagination
                   innerClass="arrows-pagination"
-                  activePage={orderQuery.page}
-                  itemsCountPerPage={orderQuery.count}
+                  activePage={listQuery.page}
+                  itemsCountPerPage={listQuery.count}
                   totalItemsCount={totalItems}
                   pageRangeDisplayed={PAGINATION_SIZE}
                   onChange={this.handlePageChange}
@@ -210,4 +210,4 @@ class OrdersList extends PureComponent {
   }
 }
 
-export default withStyles(styles)(OrdersList);
+export default withStyles(styles)(UsersList);

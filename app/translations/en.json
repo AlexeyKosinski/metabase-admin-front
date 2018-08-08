@@ -140,5 +140,7 @@
   "admin.panel.hospitals.notification.successful.save.part1": "Hospital ",
   "admin.panel.hospitals.notification.successful.save.part2": " successfully saved",
   "admin.panel.hospitals.notification.successful.assign":"DICOMs successfully assigned to user ",
+  "orders": "Orders",
+  "options": "Options",
   "":""
 }

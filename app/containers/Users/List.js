@@ -7,18 +7,17 @@ import qs from 'qs';
 import immutableProps from "hocs/immutableProps";
 import injectReducer from "utils/injectReducer";
 import QueryFilter from 'components/QueryFilter';
-import { getOrdersListAction } from "./actions";
+import { getUsersListAction } from "./actions";
 import reducer from "./reducer";
 import {
-  makeOrders,
-  selectOrdersListQuery,
-  selectOrderListFilters,
-  selectOrdersListTotalItems,
-  selectOrdersListLoading,
+  makeUsers,
+  selectUsersListQuery,
+  selectUsersListTotalItems,
+  selectUsersListLoading,
 } from "./selectors";
 import ListComponent from './components/List';
 
-class OrdersList extends QueryFilter {
+class UsersList extends QueryFilter {
   componentDidMount() {
     const {
       location: {
@@ -37,12 +36,12 @@ class OrdersList extends QueryFilter {
 
   requestMethod = (newQuery = {}) => {
     const {
-      orderQuery,
-      onGetOrdersList,
+      listQuery,
+      onGetUsersList,
     } = this.props;
 
-    onGetOrdersList({
-      ...orderQuery,
+    onGetUsersList({
+      ...listQuery,
       ...newQuery,
     });
   };
@@ -52,30 +51,28 @@ class OrdersList extends QueryFilter {
       <ListComponent
         {...this.props}
         requestMethod={this.changeQuery}
-        changeFilters={this.changeFilters}
       />
     );
   }
 }
 
 const mapStateToProps = createStructuredSelector({
-  items: makeOrders(),
-  orderQuery: selectOrdersListQuery(),
-  filters: selectOrderListFilters(),
-  totalItems: selectOrdersListTotalItems(),
-  listLoading: selectOrdersListLoading(),
+  items: makeUsers(),
+  listQuery: selectUsersListQuery(),
+  totalItems: selectUsersListTotalItems(),
+  listLoading: selectUsersListLoading(),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onGetOrdersList: payload => dispatch(getOrdersListAction(payload)),
+  onGetUsersList: payload => dispatch(getUsersListAction(payload)),
   goTo: (payload) => dispatch(push(payload)),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
-const withReducer = injectReducer({key: 'orders', reducer});
+const withReducer = injectReducer({key: 'users', reducer});
 
 export default compose(
   withReducer,
   withConnect,
   immutableProps,
-)(OrdersList)
+)(UsersList)

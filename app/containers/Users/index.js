@@ -2,52 +2,33 @@
  * Users
  */
 
-import React from 'react'
-import { Helmet } from 'react-helmet'
-import { createStructuredSelector } from 'reselect'
-import { compose } from 'redux'
-import immutableProps from 'hocs/immutableProps'
-import Users from './components/Users'
-import {getListUsersAction, updateUsersStatusAction} from './actions'
-import { connect } from 'react-redux'
-import { makeUsers } from '../Users/selectors'
-import injectReducer from '../../utils/injectReducer'
-import reducer from '../Users/reducer'
+import React from 'react';
+import {Helmet} from 'react-helmet';
+import {Switch, Route, Redirect} from 'react-router-dom';
+import trans from 'trans';
+import ListContainer from './List';
+import {
+  ROUTE_TO_USERS,
+  ROUTE_TO_USERS_LIST,
+} from 'constants/routes';
 
-export class UsersContainer extends React.PureComponent {
-
-    componentWillMount() {
-        const { onGetListUsers } = this.props;
-        onGetListUsers();
-    }
-
-    render () {
-        return (
-            <div>
-                <Helmet>
-                    <title></title>
-                    <meta name="description"/>
-                </Helmet>
-                <Users {...this.props}/>
-            </div>
-        )
-    }
+export default class UsersContainer extends React.PureComponent {
+  render() {
+    return (
+      <div>
+        <Helmet>
+          <title>{trans('title.users')}</title>
+          <meta name="description" />
+        </Helmet>
+        <Switch>
+          <Route
+            exact
+            path={ROUTE_TO_USERS}
+            render={() => (<Redirect to={ROUTE_TO_USERS_LIST} />)}
+          />
+          <Route path={ROUTE_TO_USERS_LIST} component={ListContainer} />
+        </Switch>
+      </div>
+    )
+  }
 }
-
-const mapStateToProps = createStructuredSelector({
-    users: makeUsers(),
-})
-
-const mapDispatchToProps = (dispatch) => ({
-    onGetListUsers: (data) => dispatch(getListUsersAction(data)),
-    onUpdateUsersStatus: (data) => dispatch(updateUsersStatusAction(data)),
-})
-
-const withConnect = connect(mapStateToProps, mapDispatchToProps)
-const withReducer = injectReducer({key: 'usersContainer', reducer})
-
-export default compose(
-    withReducer,
-    withConnect,
-    immutableProps,
-)(UsersContainer)
