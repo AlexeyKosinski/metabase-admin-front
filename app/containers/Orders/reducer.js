@@ -19,6 +19,16 @@ const initialState = fromJS({
       page: DEFAULT_LIST_PAGE,
       count: DEFAULT_ITEMS_PER_PAGE,
     },
+    filters: {
+      user: {
+        items: [],
+        selectedValues: [],
+      },
+      status: {
+        items: [],
+        selectedValues: [],
+      },
+    },
   },
   errors: {},
 });
