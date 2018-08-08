@@ -36,7 +36,9 @@ const initialState = fromJS({
 export default typeToReducer({
   [GET_ORDERS_LIST]: {
     START: (state = fromJS([]), action) => {
-      return state.setIn(['list', 'query'], fromJS(action.meta)).setIn(['list', 'loading'], fromJS(true));
+      return state
+        .setIn(['list', 'query'], fromJS(action.meta))
+        .setIn(['list', 'loading'], fromJS(true));
     },
     SUCCESS: (state = fromJS([]), d) => reducerParse(d,
       data => {
@@ -50,6 +52,7 @@ export default typeToReducer({
       },
       payload => {
         const {data, status} = payload;
+
         return state
           .set('errors', fromJS(data))
           .setIn(['list', 'loading'], fromJS(false));
