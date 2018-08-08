@@ -218,9 +218,9 @@ const styles = {
   image: {
     height: 50,
     width: 50,
-    background: `url(${Img})`,
+    /*background: `url(${Img})`,
     backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
+    backgroundSize: 'cover',*/
   },
   dividerBottom: {
     background: 'rgba(190, 190, 237, 0.1)',
