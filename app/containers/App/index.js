@@ -12,6 +12,7 @@ import styled from 'styled-components'
 import { Route, Switch } from 'react-router-dom'
 
 import PrivateRoute from 'components/PrivateRoute';
+import StrictlyPublicRoute from 'components/StrictlyPublicRoute';
 
 import Login from 'containers/Login/Loadable'
 import Users from 'containers/Users/Loadable'
@@ -73,7 +74,7 @@ export default function App (props) {
               <SideBar history={props.history} />
             )}
           <Switch>
-            <Route exact path={ROUTE_TO_LOGIN} component={Login} />
+            <StrictlyPublicRoute exact path={ROUTE_TO_LOGIN} component={Login} />
             <PrivateRoute path={ROUTE_TO_ORDERS} component={Orders} />
             <PrivateRoute path={ROUTE_TO_USERS} component={Users} />
             <Route path="" component={NotFoundPage} />
