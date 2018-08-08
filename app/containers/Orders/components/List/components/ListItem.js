@@ -4,6 +4,10 @@ import colors from '../../../../../style/colors'
 import {withStyles} from '@material-ui/core/styles/index'
 import TableCell from '@material-ui/core/TableCell/index'
 import dateFormat from "dateformat"
+import _ from 'lodash';
+import {
+  ORDER_STATUSES,
+} from '../../../constants';
 
 const CustomTableCell = withStyles(theme => ({
   head: {
@@ -38,16 +42,16 @@ const CustomTableCell = withStyles(theme => ({
 
 class ListItem extends React.Component {
   render() {
-    const {classes, item} = this.props;
+    const { classes, item } = this.props;
 
     return (
       <TableRow className={classes.row} key={item._id}>
-        <CustomTableCell numeric className={classes.nameRow}>{item._id}</CustomTableCell>
-        <CustomTableCell component="th" scope="row" className={classes.nameRow}>
-          {item.firstName} {item.lastName}
-        </CustomTableCell>
-        <CustomTableCell numeric>{dateFormat(new Date(item.createdAt), 'yyyy-mm-dd HH:MM')}</CustomTableCell>
-        <CustomTableCell numeric>{item.dob}</CustomTableCell>
+        <CustomTableCell className={classes.nameRow}>{_.get(item, '_id')}</CustomTableCell>
+        <CustomTableCell className={classes.nameRow}>
+          {_.get(item, 'user.owner.applicant.firstName')} {_.get(item, 'user.owner.applicant.last')}
+          </CustomTableCell>
+        <CustomTableCell>{ORDER_STATUSES[item.state]}</CustomTableCell>
+        <CustomTableCell>{dateFormat(new Date(item.createdAt), 'yyyy-mm-dd HH:MM')}</CustomTableCell>
       </TableRow>
     );
   }

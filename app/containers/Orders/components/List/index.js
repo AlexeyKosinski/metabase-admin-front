@@ -166,10 +166,10 @@ class OrdersList extends PureComponent {
           <Table className={classes.table}>
             <TableHead>
               <TableRow>
-                <CustomTableCell numeric>{trans('admin.panel.users.ID')}</CustomTableCell>
-                <CustomTableCell>{trans('admin.panel.hospitals.name')}</CustomTableCell>
-                <CustomTableCell numeric>{trans('admin.panel.users.registration.date')}</CustomTableCell>
-                <CustomTableCell numeric>{trans('admin.panel.users.birth.date')}</CustomTableCell>
+                <CustomTableCell>{trans('admin.panel.orders.ID')}</CustomTableCell>
+                <CustomTableCell>{trans('admin.panel.orders.user')}</CustomTableCell>
+                <CustomTableCell>{trans('admin.panel.orders.status')}</CustomTableCell>
+                <CustomTableCell>{trans('admin.panel.orders.craetedAt')}</CustomTableCell>
               </TableRow>
             </TableHead>
             <TableBody>{this.renderItems()}</TableBody>

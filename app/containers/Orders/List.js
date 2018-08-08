@@ -39,7 +39,7 @@ class OrdersList extends PureComponent {
 }
 
 const mapStateToProps = createStructuredSelector({
-  orders: makeOrders(),
+  items: makeOrders(),
   orderQuery: selectOrdersListQuery(),
 });
 
