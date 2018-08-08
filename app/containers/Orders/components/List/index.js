@@ -10,9 +10,14 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import {withStyles} from '@material-ui/core/styles/index'
-import colors from '../../../../style/colors'
+import { withStyles } from '@material-ui/core/styles/index'
+import Pagination from 'react-js-pagination';
+import Loading from 'components/Loading';
+import colors from 'style/colors';
 import ListItem from './components/ListItem'
+import {
+  PAGINATION_SIZE,
+} from '../../constants';
 
 const CustomTableCell = withStyles(theme => ({
   head: {
@@ -136,6 +141,12 @@ const styles = theme => ({
 });
 
 class OrdersList extends PureComponent {
+  handlePageChange = (page) => {
+    this.props.requestList({
+      page,
+    });
+  }
+
   renderItems = () => {
     const {
       items,
@@ -151,7 +162,12 @@ class OrdersList extends PureComponent {
   }
 
   render() {
-    const {classes} = this.props;
+    const {
+      classes,
+      orderQuery,
+      totalItems,
+      listLoading,
+    } = this.props;
 
     return (
       <div className={classes.container}>
@@ -162,19 +178,33 @@ class OrdersList extends PureComponent {
             </Typography>
           </Toolbar>
         </AppBar>
-        <Paper className={classes.root}>
-          <Table className={classes.table}>
-            <TableHead>
-              <TableRow>
-                <CustomTableCell>{trans('admin.panel.orders.ID')}</CustomTableCell>
-                <CustomTableCell>{trans('admin.panel.orders.user')}</CustomTableCell>
-                <CustomTableCell>{trans('admin.panel.orders.status')}</CustomTableCell>
-                <CustomTableCell>{trans('admin.panel.orders.craetedAt')}</CustomTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>{this.renderItems()}</TableBody>
-          </Table>
-        </Paper>
+        {
+          listLoading
+            ? (<Loading />)
+            : (
+              <Paper className={classes.root}>
+                <Table className={classes.table}>
+                  <TableHead>
+                    <TableRow>
+                      <CustomTableCell>{trans('admin.panel.orders.ID')}</CustomTableCell>
+                      <CustomTableCell>{trans('admin.panel.orders.user')}</CustomTableCell>
+                      <CustomTableCell>{trans('admin.panel.orders.status')}</CustomTableCell>
+                      <CustomTableCell>{trans('admin.panel.orders.craetedAt')}</CustomTableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>{this.renderItems()}</TableBody>
+                </Table>
+                <Pagination
+                  innerClass="arrows-pagination"
+                  activePage={orderQuery.page}
+                  itemsCountPerPage={orderQuery.count}
+                  totalItemsCount={totalItems}
+                  pageRangeDisplayed={PAGINATION_SIZE}
+                  onChange={this.handlePageChange}
+                />
+              </Paper>
+            )
+        }
       </div>
     )
   }

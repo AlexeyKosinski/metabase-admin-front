@@ -9,6 +9,8 @@ import reducer from "./reducer";
 import {
   makeOrders,
   selectOrdersListQuery,
+  selectOrdersListTotalItems,
+  selectOrdersListLoading,
 } from "./selectors";
 import ListComponent from './components/List';
 
@@ -22,6 +24,7 @@ class OrdersList extends PureComponent {
       orderQuery,
       onGetOrdersList,
     } = this.props;
+
     onGetOrdersList({
       ...orderQuery,
       ...newQuery,
@@ -41,6 +44,8 @@ class OrdersList extends PureComponent {
 const mapStateToProps = createStructuredSelector({
   items: makeOrders(),
   orderQuery: selectOrdersListQuery(),
+  totalItems: selectOrdersListTotalItems(),
+  listLoading: selectOrdersListLoading(),
 });
 
 const mapDispatchToProps = (dispatch) => ({

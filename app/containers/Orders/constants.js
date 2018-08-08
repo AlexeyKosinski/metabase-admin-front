@@ -5,6 +5,8 @@ export const DEFAULT_ITEMS_PER_PAGE = 10;
 export const DEFAULT_TOTAL_ITEMS = 0;
 export const DEFAULT_TOTAL_PAGES = 0;
 
+export const PAGINATION_SIZE = 5;
+
 export const ORDER_STATE_CREATED = 1;
 export const ORDER_STATE_NOT_ENOUGH = 2;
 export const ORDER_STATE_PAY_START = 3;
