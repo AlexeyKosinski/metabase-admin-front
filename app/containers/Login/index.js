@@ -15,7 +15,6 @@ import { makeSelectErrors } from './selectors'
 import reducer from './reducer'
 import Login from './components/Login'
 import immutableProps from 'hocs/immutableProps'
-import logIn from 'utils/logIn'
 import reduxForm from 'hocs/reduxForm'
 import toJS from '../../utils/toJS'
 import trans from '../../trans'
@@ -40,7 +39,7 @@ const mapStateToProps = createStructuredSelector({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  onLogin: (data) => loginApi(data).then(logIn)
+  onLogin: (data) => loginApi({ data, dispatch }),
 })
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps)

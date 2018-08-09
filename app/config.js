@@ -5,7 +5,7 @@ const globalConfig = {
     api: 'http://localhost:8080',
   },
   stage: {
-    api: 'http://admin.medx.nordwhale.com',
+    api: 'http://localhost:8080',
   },
   production: {
     api: 'http://localhost:8080',

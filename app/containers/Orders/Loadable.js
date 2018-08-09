@@ -1,6 +1,6 @@
 /**
  *
- * Asynchronously loads the component for Users
+ * Asynchronously loads the component for Login
  *
  */
 import React from 'react';

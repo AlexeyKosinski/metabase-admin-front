@@ -1,8 +1,8 @@
 export const GET_USERS_LIST = 'app/users/GET_USERS_LIST';
-export const UPDATE_USERS_STATUS = 'app/users/UPDATE_USERS_STATUS';
 
-export const ADMIN_STATUS_FROM_USER_INIT = 0;
-export const ADMIN_STATUS_FROM_USER_EMAILED = 1;
-export const ADMIN_STATUS_FROM_USER_RECEIVED = 2;
-export const ADMIN_STATUS_FROM_USER_PROCESSED = 3;
-export const ADMIN_STATUS_FROM_USER_AVAILABLE = 4;
+export const DEFAULT_LIST_PAGE = 1;
+export const DEFAULT_ITEMS_PER_PAGE = 10;
+export const DEFAULT_TOTAL_ITEMS = 0;
+export const DEFAULT_TOTAL_PAGES = 0;
+
+export const PAGINATION_SIZE = 5;

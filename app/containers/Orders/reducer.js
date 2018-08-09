@@ -2,7 +2,7 @@ import typeToReducer from 'type-to-reducer';
 import {fromJS} from 'immutable';
 import reducerParse from 'utils/reducerParse';
 import {
-  GET_USERS_LIST,
+  GET_ORDERS_LIST,
   DEFAULT_LIST_PAGE,
   DEFAULT_ITEMS_PER_PAGE,
   DEFAULT_TOTAL_ITEMS,
@@ -34,10 +34,18 @@ const initialState = fromJS({
 });
 
 export default typeToReducer({
-  [GET_USERS_LIST]: {
+  [GET_ORDERS_LIST]: {
     START: (state = fromJS([]), action) => {
+      const { filters, ...query } = action.meta;
+
+      if (filters) {
+        _.forEach(filters, (values, key) => {
+          state = state.setIn(['list', 'filters', key, 'selectedValues'], fromJS(values));
+        });
+      }
+
       return state
-        .setIn(['list', 'query'], fromJS(action.meta))
+        .setIn(['list', 'query'], fromJS(query))
         .setIn(['list', 'loading'], fromJS(true));
     },
     SUCCESS: (state = fromJS([]), d) => reducerParse(d,
@@ -45,7 +53,7 @@ export default typeToReducer({
         const totalPages = Math.ceil(data.count / state.getIn(['list', 'query', 'count']));
 
         return state
-          .setIn(['list', 'items'], fromJS(data.users))
+          .setIn(['list', 'items'], fromJS(data.orders))
           .setIn(['list', 'totalItems'], fromJS(data.count))
           .setIn(['list', 'totalPages'], fromJS(totalPages))
           .setIn(['list', 'loading'], fromJS(false));

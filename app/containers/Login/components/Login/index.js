@@ -57,7 +57,7 @@ class LoginStep extends PureComponent {
     const {error, onLogin, submitting, valid, handleSubmit} = this.props
     return (
       <FlexedContainer>
-        <ImgCover/>
+        {/*<ImgCover/>*/}
         <FormContainer>
           <form onSubmit={handleSubmit(onLogin)}>
             <FormTitle>{trans('admin.panel.form.title')}</FormTitle>

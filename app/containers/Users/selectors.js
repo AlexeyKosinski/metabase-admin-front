@@ -1,9 +1,23 @@
 import { createSelector } from 'reselect';
 
-const selectUsers = (state) => state.get('usersContainer');
+const selectUsersDomain = (state) => state.get('users');
 
 export const makeUsers = () => createSelector(
-    selectUsers,
-    (substate) => substate.get('users')
+  selectUsersDomain,
+  (substate) => substate.getIn(['list', 'items']),
 );
 
+export const selectUsersListQuery = () => createSelector(
+  selectUsersDomain,
+  (substate) => substate.getIn(['list', 'query']),
+);
+
+export const selectUsersListTotalItems = () => createSelector(
+  selectUsersDomain,
+  (substate) => substate.getIn(['list', 'totalItems']),
+);
+
+export const selectUsersListLoading = () => createSelector(
+  selectUsersDomain,
+  (substate) => substate.getIn(['list', 'loading']),
+);

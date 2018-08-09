@@ -1,6 +1,3 @@
-import { apiCreate } from 'utils/api'
-import apiSubmissionError from 'utils/apiSubmissionError'
+import { apiCreate } from 'utils/api';
 
-
-export const getListUsersApi = (data) => apiCreate().get('/users/get', data).then(apiSubmissionError);
-export const updateUsersStatus = (data) => apiCreate().post('/users/update/status', data).then(apiSubmissionError);
+export const getUsersListApi = (data) => apiCreate().get('/users/get', data);
